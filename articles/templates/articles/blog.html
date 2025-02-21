@@ -1,0 +1,353 @@
+{% load static %}
+
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <style>
+        .button-row {
+            display: flex;
+            justify-content: flex-end;
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 10px;
+            margin: 0.6% 7% 0 0;
+            }
+
+            .login-button,
+            .register-button {
+            display: inline-block;
+            padding: 10px 5px;
+            background-color: #4CAF5000;
+            color: white;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            margin-left: 10px;
+            font-family: Verdana, sans-serif;
+            font-weight: 1000;
+            }
+
+            .register-button {
+            background-color: #4CAF5000;
+            }
+
+            a.login-button:hover,
+            a.register-button:hover {
+            color: #FF4533; /* измените цвет по вашему выбору */
+            }
+
+            .divider {
+            color: #fff;
+            margin: -2px 5px 0 13px;
+            font-size: 30px;
+            font-family: Verdana, sans-serif;
+            font-weight: 1000;
+            }
+
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Articles</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-3">
+                                <div class="logo">
+                                    <a href="index.html">
+                                        <img src="img/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="{% url 'index' %}">Главная</a></li>
+                                            <li><a href="{% url 'about' %}">О нас</a></li>
+                                            <li><a href="{% url 'index' %}">Статьи<i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'index' %}">Все статьи</a></li>
+                                                    {% if request.user.is_authenticated %}
+                                                    <li><a href="{% url 'userarticle' %}">Мои статьи</a></li>
+                                                    {% else %}
+                                                    <li><a href="{% url 'add_page' %}">Добавить статью</a></li>
+                                                    {% endif %}
+                                                </ul>
+                                            </li>
+                                            <li><a href="{% url 'contact' %}">Контакты</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                <div class="buy_tkt">
+                                    <div class="book_btn d-none d-lg-block">
+                                    </div>
+                                </div>
+                            </div>
+                            {% if request.user.is_authenticated %}
+                            <div class="button-row">
+                                <a href="{% url 'add_page' %}" class="login-button">Опубликовать</a>
+                                <span class="divider">|</span>
+                                <a href="{% url 'logout' %}" class="register-button">Выйти</a>
+                            </div>
+                            {% else %}
+                            <div class="button-row">
+                                <a href="{% url 'login' %}" class="login-button">Войти</a>
+                                <span class="divider">|</span>
+                                <a href="{% url 'register' %}" class="register-button">Зарегистрироваться</a>
+                            </div>
+                            {% endif %}
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+    
+     <!-- bradcam_area -->
+     <div class="bradcam_area">
+        <div class="single_bradcam  d-flex align-items-center bradcam_bg_1 overlay">
+              <div class="container">
+                    <div class="row align-items-center justify-content-center">
+                       <div class="col-xl-12">
+                          <div class="bradcam_text text-center">
+                            <div class="shape_1 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".2s">
+                                <img src="{% static 'img/shape/shape_1.svg' %}" alt="">
+                            </div>
+                            <div class="shape_2 wow fadeInDown" data-wow-duration="1s" data-wow-delay=".3s">
+                                <img src="{% static 'img/shape/shape_2.svg' %}" alt="">
+                            </div>
+                                <h3 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">Articles</h3>
+                          </div>
+                       </div>
+                    </div>
+              </div>
+           </div>
+     </div>
+    <!-- bradcam_area end -->
+
+
+    <!--================Blog Area =================-->
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+                        {% for a in article %}
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="{{a.image_preview.url}}" alt="">
+                                    <p class="blog_item_date" style="bottom:10px">{{a.time_create}}</p>
+                            </div>
+                                {% if a.qr_code %}<img width="100" src="{{a.qr_code.url}}" alt="" >{% endif %}
+                                {% if a.image1 %}
+                                <img width="100" src="{{a.image1.url}}" alt="" >
+                                {% endif %}
+                               {% if a.image2 %}
+                                <img width="100" src="{{a.image2.url}}" alt="" >
+                                {% endif %}
+                               {% if a.image3 %}
+                                <img width="100" src="{{a.image3.url}}" alt="" >
+                                {% endif %}
+                               {% if a.image4 %}
+                                <img width="100" src="{{a.image4.url}}" alt="" >
+                                {% endif %}
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="{% url 'singleblog' a.slug %}">
+                                    <h2>{{a.title}}</h2>
+                                </a>
+                                <h4>{{a.subtitle}}</h4>
+                                <p>{{a.content|safe|linebreaks|truncatewords:48}}</p>
+                                <a href="{% url 'singleblog' a.slug %}"><p><b><i>Читать полностью</i></b></p></a>
+                                <ul class="blog-info-link">
+                                    <li><a href="#"><i class="fa fa-user"></i>{{a.category}}</a></li>
+                                    <li><a href="#"><i class="fa fa-comments"></i> 08 Comments</a></li>
+                                </ul>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                           <form id="search" action="{% url 'search_results' %}" method="get">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input name="q" class="form-control" type="text" placeholder="Поиск">
+                                        <div class="input-group-append">
+                                            <button class="btn" type="button"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                    type="submit">Search</button>
+                            </form>
+                        </aside>
+
+                        <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title">Категории</h4>
+                            <ul class="list cat-list">
+                                {% for c in category %}
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>{{c.category}}</p>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </aside>
+
+                        <aside class="single_sidebar_widget popular_post_widget">
+                            <h3 class="widget_title">Недавние посты</h3>
+                            {% for ra in recentarticle %}
+                            <div class="media post_item">
+                                <img src="{{ra.image_preview.url}}" alt="post" width="100">
+                                <div class="media-body">
+                                    <a href="single-blog.html">
+                                        <h3>{{ra.title}}</h3>
+                                    </a>
+                                    <p>{{ra.time_create}}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </aside>
+                        <aside class="single_sidebar_widget instagram_feeds">
+                            <h4 class="widget_title">Instagram Feeds</h4>
+                            <ul class="instagram_row flex-wrap">
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="{% static 'img/post/post_5.png' %}" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="{% static 'img/post/post_6.png' %}" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="{% static 'img/post/post_7.png' %}" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="{% static 'img/post/post_8.png' %}" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="{% static 'img/post/post_9.png' %}" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="{% static 'img/post/post_10.png' %}" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </aside>
+
+
+                        <aside class="single_sidebar_widget newsletter_widget">
+                            <h4 class="widget_title">Рассылка</h4>
+
+                            <form action="#">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter email'" placeholder='Введите email' required>
+                                </div>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                    type="submit">Подписаться</button>
+                            </form>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================Blog Area =================-->
+
+    <!-- brand_area_start  -->
+    <div class="brand_area black_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title text-center mb-80">
+                        <h4 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">Articles 2023</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- brand_area_end  -->
+
+    <!-- JS here -->
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/ajax-form.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/scrollIt.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/gijgo.min.js' %}"></script>
+
+    <!--contact js-->
+    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+   
+</body>
+</html>
